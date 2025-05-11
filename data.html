@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fitness Tracker - Data Tracking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar-brand {
+            color: red;
+        }
+        
+        .data-form input {
+            max-width: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="main.html">
+                    <img src="C:/Users/Ryan/Downloads/Tracker11.png" alt="Logo" width="50" height="30" class="d-inline-block align-text-top"> Fitness Tracker
+                </a>
+                <div class="d-flex align-items-center ms-auto">
+                    <a class="nav-link text-danger" href="main.html">Home</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Track Your Fitness Data</h2>
+
+        <!-- Data Display Section -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card text-white bg-success h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Steps Today</h5>
+                        <p class="card-text fs-3" id="stepsCount">0</p>
+                        <button class="btn btn-warning w-100 mt-2" id="editStepsBtn">Edit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-danger h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Calories Burned</h5>
+                        <p class="card-text fs-3" id="caloriesBurned">0 kcal</p>
+                        <button class="btn btn-warning w-100 mt-2" id="editCaloriesBtn">Edit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-info h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Workouts Completed</h5>
+                        <p class="card-text fs-3" id="workoutsCompleted">0</p>
+                        <button class="btn btn-warning w-100 mt-2" id="editWorkoutsBtn">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Remove Form, Keep Update Button -->
+        <div class="data-form">
+            <h3 class="text-center">Update Your Data</h3>
+            <button type="button" class="btn btn-danger w-100 mt-3" id="updateDataBtn">Update Data</button>
+            <button type="button" class="btn btn-secondary w-100 mt-3" id="deleteDataBtn">Delete Data</button>
+        </div>
+    </div>
+
+    <footer class="text-center text-muted mt-4">
+        <p>&copy; 2025 Tracking Fitness with Ryan Gadayan. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Fetch existing data from localStorage
+        const stepsToday = localStorage.getItem("stepsToday") || 0;
+        const caloriesBurned = localStorage.getItem("caloriesBurned") || 0;
+        const workoutsCompleted = localStorage.getItem("workoutsCompleted") || 0;
+
+        // Display data in the dashboard section
+        document.getElementById("stepsCount").textContent = stepsToday;
+        document.getElementById("caloriesBurned").textContent = `${caloriesBurned} kcal`;
+        document.getElementById("workoutsCompleted").textContent = workoutsCompleted;
+
+        // Handle the edit button click events
+        document.getElementById("editStepsBtn").addEventListener("click", function() {
+            const newSteps = prompt("Enter new steps value:", stepsToday);
+            if (newSteps !== null) {
+                localStorage.setItem("stepsToday", newSteps);
+                document.getElementById("stepsCount").textContent = newSteps;
+                alert("Steps updated successfully!");
+            }
+        });
+
+        document.getElementById("editCaloriesBtn").addEventListener("click", function() {
+            const newCalories = prompt("Enter new calories value:", caloriesBurned);
+            if (newCalories !== null) {
+                localStorage.setItem("caloriesBurned", newCalories);
+                document.getElementById("caloriesBurned").textContent = `${newCalories} kcal`;
+                alert("Calories updated successfully!");
+            }
+        });
+
+        document.getElementById("editWorkoutsBtn").addEventListener("click", function() {
+            const newWorkouts = prompt("Enter new workouts value:", workoutsCompleted);
+            if (newWorkouts !== null) {
+                localStorage.setItem("workoutsCompleted", newWorkouts);
+                document.getElementById("workoutsCompleted").textContent = newWorkouts;
+                alert("Workouts updated successfully!");
+            }
+        });
+
+        // Handle update data button
+        const updateDataBtn = document.getElementById("updateDataBtn");
+
+        updateDataBtn.addEventListener("click", function() {
+            // Optionally, do something before navigating (like validation)
+            alert("Data updated successfully!");
+            // Redirect to the home page after the update
+            window.location.href = "main.html"; // Change "main.html" to your actual home page URL
+        });
+
+        // Handle delete data
+        const deleteDataBtn = document.getElementById("deleteDataBtn");
+
+        deleteDataBtn.addEventListener("click", function() {
+            // Clear data from localStorage
+            localStorage.removeItem("stepsToday");
+            localStorage.removeItem("caloriesBurned");
+            localStorage.removeItem("workoutsCompleted");
+
+            // Reset the displayed data
+            document.getElementById("stepsCount").textContent = 0;
+            document.getElementById("caloriesBurned").textContent = "0 kcal";
+            document.getElementById("workoutsCompleted").textContent = 0;
+
+            // Alert user about the deletion
+            alert("Data deleted successfully!");
+
+            // Optionally, redirect to home page
+            // window.location.href = "main.html"; // Uncomment this to redirect
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

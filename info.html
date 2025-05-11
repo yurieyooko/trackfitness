@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fitness Tracker - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card-body {
+            font-size: 1.2rem;
+        }
+        
+        #savedInfo p {
+            font-weight: bold;
+        }
+        
+        .container {
+            margin-top: 2rem;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            margin-top: 40px;
+        }
+        /* Styling for the saved information with black font */
+        
+        #savedInfo {
+            background-color: #e9ecef;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 2px solid #0d6efd;
+            margin-top: 2rem;
+            color: black;
+            /* Set text color to black */
+        }
+        
+        #savedInfo h5 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        #savedInfo p {
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+        }
+        /* Video styling */
+        
+        .video-container {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body class="bg-dark">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="main.html">
+                <img src="C:/Users/Ryan/Downloads/Tracker11.png" alt="Logo" width="50" height="30" class="d-inline-block align-text-top"> Fitness Tracker
+            </a>
+            <ul class="nav justify-content-end mb-0">
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="main.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="info.html">Information</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <h2 class="text-white text-center mb-4">Your Fitness Dashboard</h2>
+
+        <!-- Body Information Form -->
+        <div class="card bg-light mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Your Body Information</h5>
+                <form id="bodyInfoForm">
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Age</label>
+                        <input type="number" class="form-control" id="age" placeholder="Enter your age" value="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="height" class="form-label">Height (in cm)</label>
+                        <input type="number" class="form-control" id="height" placeholder="Enter your height" value="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="weight" class="form-label">Weight (in kg)</label>
+                        <input type="number" class="form-control" id="weight" placeholder="Enter your weight" value="">
+                    </div>
+                    <button type="submit" class="btn btn-success">Save Info</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Display Saved Information -->
+        <div id="savedInfo">
+            <h5>Saved Information:</h5>
+            <p id="displayAge"></p>
+            <p id="displayHeight"></p>
+            <p id="displayWeight"></p>
+        </div>
+
+        <!-- Video Tutorial Section -->
+        <div class="video-container">
+            <h3 class="text-white">Step-by-Step Fitness Tutorial</h3>
+            <iframe src="https://www.youtube.com/embed/kG6aDQciofY?t=23" title="Fitness Tutorial Video"></iframe>
+        </div>
+
+        <!-- Button to go back to the home page -->
+        <div class="text-center mt-4">
+            <a href="main.html" class="btn btn-primary w-50">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        // Function to update the displayed information on the page
+        function displayInfo() {
+            // Get the saved data from localStorage
+            const savedAge = localStorage.getItem('age');
+            const savedHeight = localStorage.getItem('height');
+            const savedWeight = localStorage.getItem('weight');
+
+            // Display saved data in the savedInfo section
+            document.getElementById('displayAge').textContent = savedAge ? `Age: ${savedAge}` : 'Age: Not Set';
+            document.getElementById('displayHeight').textContent = savedHeight ? `Height: ${savedHeight} cm` : 'Height: Not Set';
+            document.getElementById('displayWeight').textContent = savedWeight ? `Weight: ${savedWeight} kg` : 'Weight: Not Set';
+
+            // If data exists, pre-fill the form inputs
+            document.getElementById('age').value = savedAge || '';
+            document.getElementById('height').value = savedHeight || '';
+            document.getElementById('weight').value = savedWeight || '';
+        }
+
+        // Handle form submission to save or update data in localStorage
+        document.getElementById('bodyInfoForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the form from refreshing the page
+
+            const age = document.getElementById('age').value;
+            const height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+
+            // Save the information in localStorage
+            localStorage.setItem('age', age);
+            localStorage.setItem('height', height);
+            localStorage.setItem('weight', weight);
+
+            // Call displayInfo to update the page with the latest data
+            displayInfo();
+        });
+
+        // Call the displayInfo function when the page loads
+        displayInfo();
+    </script>
+
+    <!-- Footer with copyright -->
+    <div class="footer">
+        <p>&copy; 2025 Fitness Tracker with Ryan Gadayan. All rights reserved.</p>
+    </div>
+
+</body>
+
+</html>

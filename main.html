@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fitness Tracker - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet" />
+    <style>
+        .carousel-inner {
+            background-size: cover;
+        }
+        
+        .carousel-item {
+            background-size: cover;
+            border: 3px solid #ccc;
+        }
+        
+        .carousel-item img {
+            object-fit: cover;
+            height: 400px;
+            width: 100%;
+            border-radius: 10px;
+        }
+        
+        .nav-item {
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .navbar-brand {
+            color: red;
+        }
+        
+        #accountName {
+            color: white;
+            margin-right: 1rem;
+            font-weight: bold;
+        }
+        
+        .card:hover {
+            transform: scale(1.03);
+            transition: 0.3s ease-in-out;
+        }
+        
+        #calendar {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="main.html">
+                    <img src="C:/Users/Ryan/Downloads/Tracker11.png" alt="Logo" width="50" height="30" class="d-inline-block align-text-top"> Fitness Tracker
+                </a>
+                <div class="d-flex align-items-center ms-auto">
+                    <span id="accountName"></span>
+                    <ul class="nav justify-content-end mb-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-danger" href="main.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-danger" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-danger" href="info.html"> Information</a>
+                        </li>
+                        <li class="nav-item" id="logoutItem" style="display: none;">
+                            <a class="nav-link text-danger" href="#" id="logoutButton">Logout</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="C:/Users/Ryan/Downloads/fitnesstrack.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="C:/Users/Ryan/Downloads/trackingfitnesss.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="C:/Users/Ryan/Downloads/trackkfitness.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div class="container my-5">
+        <h2 class="text-white text-center mb-4">Your Fitness Dashboard</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card text-white bg-success h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Steps Today</h5>
+                        <p class="card-text fs-3" id="stepsCount">0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-danger h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Calories Burned</h5>
+                        <p class="card-text fs-3" id="caloriesBurned">0 kcal</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-info h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Workouts Completed</h5>
+                        <p class="card-text fs-3" id="workoutsCompleted">0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendar View -->
+        <div id="calendar" class="my-5"></div>
+
+        <!-- Button to Navigate to Data Tracking Page -->
+        <div class="text-center mt-4">
+            <a href="data.html" class="btn btn-primary w-50">Track Your Data</a>
+        </div>
+    </div>
+
+    <footer class="text-center text-muted mt-4">
+        <p>&copy; 2025 Tracking Fitness with Ryan Gadayan. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+
+    <script>
+        const calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
+            initialView: 'dayGridMonth',
+            events: [{
+                title: 'Jogging - 500 steps',
+                start: '2025-05-11',
+                color: 'green',
+                textColor: 'white'
+            }, {
+                title: 'Gym - 200 kcal',
+                start: '2025-05-12',
+                color: 'red',
+                textColor: 'white'
+            }, {
+                title: 'Cycling - 30 minutes',
+                start: '2025-05-13',
+                color: 'blue',
+                textColor: 'white'
+            }],
+            dateClick: function(info) {
+                const title = prompt("Enter event title:");
+                if (title) {
+                    calendar.addEvent({
+                        title: title,
+                        start: info.dateStr,
+                        color: 'purple',
+                        textColor: 'white'
+                    });
+                }
+            },
+            eventClick: function(info) {
+                const newTitle = prompt("Edit event title:", info.event.title);
+                if (newTitle) {
+                    info.event.setProp('title', newTitle);
+                }
+
+                const deleteEvent = confirm("Do you want to delete this event?");
+                if (deleteEvent) {
+                    info.event.remove();
+                }
+            }
+        });
+        calendar.render();
+
+        const name = localStorage.getItem("loggedInUser");
+        const accountNameSpan = document.getElementById("accountName");
+        const logoutButton = document.getElementById("logoutButton");
+        const logoutItem = document.getElementById("logoutItem");
+
+        if (name) {
+            accountNameSpan.textContent = `Welcome, ${name}`;
+            logoutItem.style.display = "block";
+        }
+
+        logoutButton.addEventListener("click", function(event) {
+            event.preventDefault();
+            const confirmLogout = confirm("Are you sure you want to log out?");
+            if (confirmLogout) {
+                localStorage.removeItem("loggedInUser");
+                window.location.href = "login.html";
+            }
+        });
+
+        document.getElementById("stepsCount").textContent = localStorage.getItem("stepsToday") || 0;
+        document.getElementById("caloriesBurned").textContent = `${localStorage.getItem("caloriesBurned") || 0} kcal`;
+        document.getElementById("workoutsCompleted").textContent = localStorage.getItem("workoutsCompleted") || 0;
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
